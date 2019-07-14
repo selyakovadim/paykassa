@@ -84,6 +84,6 @@ $invoice = $sci->getInvoice([
 $response = $sci->checkPayment($payment_hash);
 ```
 
-### More info
+### References
 - https://paykassa.pro/docs/
 - https://paykassa.pro/en/developers/
