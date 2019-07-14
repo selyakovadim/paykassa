@@ -1,0 +1,20 @@
+{
+    "name": "selyakovadim/paykassa",
+    "description": "Package for paykassa.pro SCI & API",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vadim Selyakov",
+            "email": "selyakovadim@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "~6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Paykassa\\": "src/"
+        }
+    }
+}
