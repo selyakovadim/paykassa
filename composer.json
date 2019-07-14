@@ -1,6 +1,6 @@
 {
     "name": "selyakovadim/paykassa",
-    "description": "Package for paykassa.pro SCI & API",
+    "description": "Package for Paykassa SCI & API",
     "type": "library",
     "license": "MIT",
     "authors": [
