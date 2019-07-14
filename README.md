@@ -13,8 +13,8 @@ Get yours Marchant and API credentials from https://paykassa.pro
 ### PHP
 
 ```php
-$api = new Paykassa\PaykssaApi($api_id, $api_key);
-$sci = new Paykassa\PaykssaSci($sci_id, $sci_key);
+$api = new Paykassa\PaykassaApi($api_id, $api_key);
+$sci = new Paykassa\PaykassaSci($sci_id, $sci_key);
 ```
 
 ### Laravel 
@@ -29,8 +29,8 @@ PAYKASSA_API_KEY=
 ```
 
 ```php
-$api = new Paykassa\PaykssaApi();
-$sci = new Paykassa\PaykssaSci();
+$api = new Paykassa\PaykassaApi();
+$sci = new Paykassa\PaykassaSci();
 ```
 
 ## Usage
