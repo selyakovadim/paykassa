@@ -13,14 +13,14 @@ class PaykassaSci extends PaykassaBase
 {
     const V = '0.4';
 
-    const PAYKASSA_SCI_ID = 'PAYKASSA_SCI_ID';
-    const PAYKASSA_SCI_KEY = 'PAYKASSA_SCI_KEY';
+    const ENV_SCI_ID = 'PAYKASSA_SCI_ID';
+    const ENV_SCI_KEY = 'PAYKASSA_SCI_KEY';
 
-    public function __construct($id = null, $key = null)
+    public function __construct(int $id = null, string $key = null)
     {
         if (function_exists('env')) {
-            $this->id = env(self::PAYKASSA_SCI_ID, $id);
-            $this->key = env(self::PAYKASSA_SCI_KEY, $key);
+            $id = env(self::ENV_SCI_ID, $id);
+            $key = env(self::ENV_SCI_KEY, $key);
         }
 
         $url = 'https://paykassa.pro/sci/' . self::V . '/';

@@ -6,9 +6,8 @@ use GuzzleHttp\Client;
 
 abstract class PaykassaBase
 {
-    protected $id;
-    protected $key;
-
+    private $id;
+    private $key;
     private $client;
 
     public function __construct(int $id, string $key, string $url)
@@ -27,7 +26,9 @@ abstract class PaykassaBase
             'form_params' => array_merge($params, [
                 'func' => $endpoint,
                 'sci_id' => $this->id,
+                'api_id' => $this->id,
                 'sci_key' => $this->key,
+                'api_key' => $this->key,
             ]),
         ]);
 
