@@ -13,14 +13,14 @@ class PaykassaApi extends PaykassaBase
 {
     const V = '0.5';
 
-    const PAYKASSA_ID = 'PAYKASSA_API_ID';
-    const PAYKASSA_KEY = 'PAYKASSA_API_KEY';
+    const PAYKASSA_API_ID = 'PAYKASSA_API_ID';
+    const PAYKASSA_API_KEY = 'PAYKASSA_API_KEY';
 
     public function __construct($id = null, $key = null)
     {
         if (function_exists('env')) {
-            $this->api_id = env(self::PAYKASSA_ID, $id);
-            $this->api_key = env(self::PAYKASSA_KEY, $key);
+            $this->id = env(self::PAYKASSA_API_ID, $id);
+            $this->key = env(self::PAYKASSA_API_KEY, $key);
         }
 
         $url = 'https://paykassa.pro/api/' . self::V . '/';

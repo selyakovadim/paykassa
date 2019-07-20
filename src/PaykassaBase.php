@@ -6,8 +6,9 @@ use GuzzleHttp\Client;
 
 abstract class PaykassaBase
 {
-    private $id;
-    private $key;
+    protected $id;
+    protected $key;
+
     private $client;
 
     public function __construct(int $id, string $key, string $url)
@@ -32,5 +33,4 @@ abstract class PaykassaBase
 
         return json_decode($response->getBody(), true);
     }
-
 }
