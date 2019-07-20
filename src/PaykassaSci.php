@@ -2,8 +2,6 @@
 
 namespace Paykassa;
 
-use GuzzleHttp\Client;
-
 /**
  * Class PaykassaSci
  * @package Paykassa
@@ -11,37 +9,22 @@ use GuzzleHttp\Client;
  * @version 0.4
  * @see https://paykassa.pro/docs/#api-SCI
  */
-class PaykassaSci
+class PaykassaSci extends PaykassaBase
 {
     const V = '0.4';
-    private $client;
 
-    public function __construct(int $id = null, string $key = null)
+    const PAYKASSA_ID = 'PAYKASSA_SCI_ID';
+    const PAYKASSA_KEY = 'PAYKASSA_SCI_KEY';
+
+    public function __construct($id = null, $key = null)
     {
-        $this->sci_id = $id;
-        $this->sci_key = $key;
-
         if (function_exists('env')) {
-            $this->sci_id = env('PAYKASSA_SCI_ID', $id);
-            $this->sci_key = env('PAYKASSA_SCI_KEY', $key);
+            $this->api_id = env(self::PAYKASSA_ID, $id);
+            $this->api_key = env(self::PAYKASSA_KEY, $key);
         }
 
-        $this->client = new Client([
-            'base_uri' => 'https://paykassa.pro/sci/' . self::V . '/',
-        ]);
-    }
-
-    private function post(string $endpoint, array $params = []): array
-    {
-        $response = $this->client->request('POST', 'index.php', [
-            'form_params' => array_merge($params, [
-                'func' => $endpoint,
-                'sci_id' => $this->sci_id,
-                'sci_key' => $this->sci_key,
-            ]),
-        ]);
-
-        return json_decode($response->getBody(), true);
+        $url = 'https://paykassa.pro/sci/' . self::V . '/';
+        parent::__construct($id, $key, $url);
     }
 
     /**
@@ -50,7 +33,7 @@ class PaykassaSci
      */
     public function getAddress(array $params): array
     {
-        return $this->post('sci_create_order_get_data', $params);
+        return $this->request('sci_create_order_get_data', $params);
     }
 
     /**
@@ -59,7 +42,7 @@ class PaykassaSci
      */
     public function getInvoice(array $params): array
     {
-        return $this->post('sci_create_order', $params);
+        return $this->request('sci_create_order', $params);
     }
 
     /**
@@ -68,7 +51,7 @@ class PaykassaSci
      */
     public function checkPayment(string $hash): array
     {
-        return $this->post('sci_confirm_order', [
+        return $this->request('sci_confirm_order', [
             'private_hash' => $hash,
         ]);
     }

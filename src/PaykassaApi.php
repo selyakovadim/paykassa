@@ -2,8 +2,6 @@
 
 namespace Paykassa;
 
-use GuzzleHttp\Client;
-
 /**
  * Class PaykassaApi
  * @package Paykassa
@@ -11,37 +9,22 @@ use GuzzleHttp\Client;
  * @version 0.5
  * @see https://paykassa.pro/docs/#api-API
  */
-class PaykassaApi
+class PaykassaApi extends PaykassaBase
 {
     const V = '0.5';
-    private $client;
 
-    public function __construct(int $id = null, string $key = null)
+    const PAYKASSA_ID = 'PAYKASSA_API_ID';
+    const PAYKASSA_KEY = 'PAYKASSA_API_KEY';
+
+    public function __construct($id = null, $key = null)
     {
-        $this->api_id = $id;
-        $this->api_key = $key;
-
         if (function_exists('env')) {
-            $this->api_id = env('PAYKASSA_API_ID', $id);
-            $this->api_key = env('PAYKASSA_API_KEY', $key);
+            $this->api_id = env(self::PAYKASSA_ID, $id);
+            $this->api_key = env(self::PAYKASSA_KEY, $key);
         }
 
-        $this->client = new Client([
-            'base_uri' => 'https://paykassa.pro/api/' . self::V . '/',
-        ]);
-    }
-
-    private function post(string $endpoint, array $params = []): array
-    {
-        $response = $this->client->request('POST', 'index.php', [
-            'form_params' => array_merge($params, [
-                'func' => $endpoint,
-                'api_id' => $this->api_id,
-                'api_key' => $this->api_key,
-            ]),
-        ]);
-
-        return json_decode($response->getBody(), true);
+        $url = 'https://paykassa.pro/api/' . self::V . '/';
+        parent::__construct($id, $key, $url);
     }
 
     /**
@@ -50,7 +33,7 @@ class PaykassaApi
      */
     public function getBalance(int $shop): array
     {
-        return $this->post('api_get_shop_balance', [
+        return $this->request('api_get_shop_balance', [
             'shop' => $shop,
         ]);
     }
@@ -61,6 +44,6 @@ class PaykassaApi
      */
     public function makePayment(array $params): array
     {
-        return $this->post('api_payment', $params);
+        return $this->request('api_payment', $params);
     }
 }
