@@ -61,8 +61,8 @@ $address = $sci->getAddress([
     'system' => 11,
     'currency' => 'BTC',
     'order_id' => 100500,
-    'comment' => 'Invoice #100500'
-    'amount' => 100,
+    'comment' => 'Invoice #100500',
+    'amount' => 100
 ]);
 ```
 
@@ -73,8 +73,8 @@ $invoice = $sci->getInvoice([
     'system' => 1,
     'currency' => 'USD',
     'order_id' => 100500,
-    'comment' => 'Invoice #100500'
-    'amount' => 100,
+    'comment' => 'Invoice #100500',
+    'amount' => 100
 ]);
 ```
 
