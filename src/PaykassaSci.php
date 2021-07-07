@@ -55,4 +55,16 @@ class PaykassaSci extends PaykassaBase
             'private_hash' => $hash,
         ]);
     }
+    
+    /**
+    * Check payment Info (For IPN)
+    * @see https://paykassa.pro/docs/#api-SCI-sci_confirm_transaction_notification
+    */
+    public function checkFullPayment(string $hash): array
+    {
+        return $this->request('sci_confirm_transaction_notification', [
+            'private_hash' => $hash,
+        ]);
+    }
+    
 }
